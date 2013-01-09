@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/index.css" />
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    <title>{% block title %}Personnel{% endblock %}</title>
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+    <div id="people-selector" class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            People
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a tabindex="-1" href="#">Action</a></li>
+            <li class="divider"></li>
+            <li><a tabindex="-1" href="/people">Manage...</a></li>
+        </ul>
+    </div>
+</div>
+
+<div id="content" class="container">
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

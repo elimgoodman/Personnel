@@ -1,0 +1,17 @@
+body {
+    padding: 40px;
+}
+
+#content {
+    margin-top: 28px;
+}
+
+#people-selector {
+    float: right;
+    margin-right: 30px;
+}
+
+.dropdown-menu {
+    right: 0;
+    left: auto;
+}
