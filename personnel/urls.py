@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     url(r'^people/edit/$', 'people.views.edit_person'),
     url(r'^people/(\w+)/$', 'people.views.view_person'),
     url(r'^people/(\w+)/update_info$', 'people.views.update_info'),
+    url(r'^people/(\w+)/journal$', 'people.views.journal'),
+    url(r'^people/(\w+)/journal/add$', 'people.views.add_entry'),
     # url(r'^personnel/', include('personnel.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

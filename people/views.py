@@ -1,6 +1,6 @@
-import json
+import json, datetime
 # Create your views here.
-from people.models import Person
+from people.models import Person, Entry
 from django.shortcuts import render_to_response, redirect
 from django.template import Context, loader
 from django.http import HttpResponse
@@ -27,11 +27,37 @@ def update_info(r, nickname):
 
     return HttpResponse(json.dumps(True), mimetype="application/json" )
 
+def journal(r, nickname):
+    person = Person.objects.get(nickname=nickname)
+    entries = Entry.objects.filter(subject=person).order_by('-created')
+
+    return render(r, 'journal.jinja', {
+        'person': person,
+        'entries': entries
+    })
+
 def view_person(r, nickname):
     person = Person.objects.get(nickname=nickname)
     return render(r, 'view_person.jinja', {
         'person': person
     })
+
+def add_entry(r, nickname):
+    person = Person.objects.get(nickname=nickname)
+
+    if(r.method == "GET"):
+        return render(r, 'add_entry.jinja', {
+            'person': person
+        })
+    elif(r.method == "POST"):
+        e = Entry(
+            content=r.POST['content'],
+            created=datetime.datetime.now(),
+            updated=datetime.datetime.now(),
+            subject=person
+        )
+        e.save()
+        return redirect("/people/%s/journal" % (person.nickname))
 
 def edit_person(r):
     if(r.method == "GET"):

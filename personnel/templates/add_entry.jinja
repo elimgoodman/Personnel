@@ -1,0 +1,13 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+<h1>Add an Entry for {{person.first_name}} </h1>
+
+<form method=POST>{% csrf_token %}
+    <textarea name="content"></textarea>
+    <input class="btn" type="submit" value="Save" />
+</form>
+
+{% endblock %}
+
+
