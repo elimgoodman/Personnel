@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/read.bootstrap.css" />
     <link rel="stylesheet" href="/static/css/index.css" />
     <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/editable.js"></script>
     <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/js/autogrow.js"></script>
+    <script type="text/javascript" src="/static/js/common.js"></script>
     <title>{% block title %}Personnel{% endblock %}</title>
 </head>
 
@@ -18,7 +21,9 @@
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-            <li><a tabindex="-1" href="#">Action</a></li>
+            {% for person in people %}
+                <li><a tabindex="-1" href="/people/{{person.nickname}}">{{person.full_name}}</a></li>
+            {% endfor %}
             <li class="divider"></li>
             <li><a tabindex="-1" href="/people">Manage...</a></li>
         </ul>

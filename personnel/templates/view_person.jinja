@@ -1,0 +1,23 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+<h1 id="person-name">{{person.full_name}}</h1>
+
+{%csrf_token %}
+    <ul id="person-action" class="nav nav-pills">
+      <li class="active">
+        <a href="/people/{{person.nickname}}">Overview</a>
+      </li>
+      <li><a href="/people/{{person.nickname}}/journal">Journal</a></li>
+      <li><a href="/people/{{person.nickname}}/feedback">Feedback</a></li>
+    </ul>
+
+    <div id="person-info" data-name="{{person.nickname}}">
+        {% if person.info %}
+            {{person.info}}
+        {% else %}
+            <em>Nothing yet...</em>
+        {% endif %}
+    </div>
+</ul>
+{% endblock %}

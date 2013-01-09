@@ -4,7 +4,7 @@
 <h1>People</h1>
 {% if people %}
     {% for person in people %}
-        <h2>{{ person.first_name }}</h2>
+        <a href="/people/{{person.nickname}}">{{ person.full_name }}</a>
     {% endfor %}
 {% else %}
     You're not managing anyone. <a href="/people/edit">Add someone.</a>

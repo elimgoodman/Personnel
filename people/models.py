@@ -6,6 +6,9 @@ class Person(models.Model):
     nickname = models.CharField(max_length=200)
     info = models.TextField()
     active = models.BooleanField(default=True)
+    
+    def full_name(self):
+        return self.first_name + " " + self.last_name
 
 class Entry(models.Model):
     content = models.TextField()
