@@ -10,36 +10,46 @@
     <textarea class="content" name="content"></textarea>
     
     <h4>Feedback that {{person.first_name}} gave:</h4>
-    <ul id="feedback-field-list">
-        <li class="feedback-field">
-            <textarea class="feedback-content" /></textarea>
-            for
-            <select class="feedback-recipient">
-                {% for recipient in people %}
-                    {% if recipient.id != person.id %}
-                      <option value="{{recipient.id}}">{{recipient.full_name}}</option>
-                    {% endif %}
-                {% endfor %}
-            </select>
-        </li>
-    <ul>
+    <ul id="feedback-field-list"></ul>
     
+    <a href="#" id="add-feedback">Add feedback</a>
     <input type="hidden" value="" id="feedback-field" name="feedback" />
     <input class="btn" type="submit" value="Save" />
 </form>
 
+<li class="feedback-field template">
+    <textarea class="feedback-content" /></textarea>
+    for
+    <select class="feedback-recipient">
+        {% for recipient in people %}
+            {% if recipient.id != person.id %}
+              <option value="{{recipient.id}}">{{recipient.full_name}}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+</li>
+
 <script type="text/javascript">
     $(function(){
-        var fields = [];
+        $("#add-feedback").click(function() {
+            var li = $(".feedback-field.template").clone();
+            li.removeClass('template');
+            $("#feedback-field-list").append(li);
+            return false;
+        });
+
         $('#entry-form').submit(function(){
-          $('.feedback-field').each(function(){
+          var fields = [];
+          $('.feedback-field').not('.template').each(function(){
               var content = $(this).find(".feedback-content").val();
               var recipient = $(this).find(".feedback-recipient").val();
-
-              fields.push({
-                  content: content,
-                  recipient: recipient
-              });
+                
+              if(content != "") {
+                  fields.push({
+                      content: content,
+                      recipient: recipient
+                  });
+              }
           });
         
           $("#feedback-field").val(JSON.stringify(fields));

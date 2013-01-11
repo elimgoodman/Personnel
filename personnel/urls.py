@@ -12,7 +12,10 @@ urlpatterns = patterns('',
     url(r'^people/(\w+)/$', 'people.views.view_person'),
     url(r'^people/(\w+)/update_info$', 'people.views.update_info'),
     url(r'^people/(\w+)/journal$', 'people.views.journal'),
+    url(r'^people/(\w+)/feedback$', 'people.views.feedback'),
     url(r'^people/(\w+)/journal/add$', 'people.views.add_entry'),
+    url(r'^feedback/communicated$', 'people.views.feedback_communicated'),
+    url(r'^feedback/closed_loop$', 'people.views.feedback_closed_loop'),
     # url(r'^personnel/', include('personnel.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

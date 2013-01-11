@@ -1,9 +1,24 @@
-<h4> Things to Address: </h4>
-<ul id="things-to-address">
-    {% for feedback in person.pending_feedback %}
-        <li><a href="/people/{{feedback.originator.nickname}}">{{feedback.originator.full_name}}</a>:
-        &quot;
-        {{feedback.content}}
-        &quot;</li>
-    {% endfor %}
-</ul>
+{% if person.has_things_to_address %}
+    <h4> Things to Address: </h4>
+    <ul id="things-to-address">
+        {% for feedback in person.pending_feedback %}
+            <li>
+                <a href="/people/{{feedback.originator.nickname}}">{{feedback.originator.full_name}}</a> gave feedback:
+                &quot;
+                {{feedback.content}}
+                &quot;
+                <a class="communicated btn" data-feedback-id="{{feedback.id}}" href='#'>Communicated</a>
+            </li>
+        {% endfor %}
+        {% for feedback in person.communicated_feedback %}
+            <li>
+                Communicated
+                &quot;
+                {{feedback.content}}
+                &quot;
+                to <a href="{{feedback.recipient.get_url}}">{{feedback.recipient.full_name}}</a>
+                <a class="closed-loop btn" data-feedback-id="{{feedback.id}}" href='#'>Closed Loop</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

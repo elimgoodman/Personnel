@@ -17,6 +17,19 @@ class Person(models.Model):
             communicated=False,
             closed_loop=False
         )
+
+    def communicated_feedback(self):
+        return Feedback.objects.filter(
+            originator=self, 
+            communicated=True,
+            closed_loop=False
+        )
+
+    def get_url(self):
+        return "/people/%s" % (self.nickname)
+    
+    def has_things_to_address(self):
+        return bool(self.pending_feedback()) or bool(self.communicated_feedback())
     
 class Entry(models.Model):
     content = models.TextField()

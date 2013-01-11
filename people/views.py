@@ -27,6 +27,24 @@ def update_info(r, nickname):
 
     return HttpResponse(json.dumps(True), mimetype="application/json" )
 
+def feedback_communicated(r):
+    feedback_id = r.POST['feedback_id']
+    feedback = Feedback.objects.get(id=feedback_id)
+    feedback.communicated = True
+    feedback.communicated_on = datetime.datetime.now()
+    feedback.save()
+
+    return HttpResponse(json.dumps(True), mimetype="application/json" )
+
+def feedback_closed_loop(r):
+    feedback_id = r.POST['feedback_id']
+    feedback = Feedback.objects.get(id=feedback_id)
+    feedback.closed_loop = True
+    feedback.closed_loop_on = datetime.datetime.now()
+    feedback.save()
+
+    return HttpResponse(json.dumps(True), mimetype="application/json" )
+
 def journal(r, nickname):
     person = Person.objects.get(nickname=nickname)
     entries = Entry.objects.filter(subject=person).order_by('-created')
@@ -34,6 +52,15 @@ def journal(r, nickname):
     return render(r, 'journal.jinja', {
         'person': person,
         'entries': entries
+    })
+
+def feedback(r, nickname):
+    person = Person.objects.get(nickname=nickname)
+    feedback = Feedback.objects.filter(recipient=person).order_by('-created')
+
+    return render(r, 'feedback.jinja', {
+        'person': person,
+        'feedback': feedback
     })
 
 def view_person(r, nickname):
