@@ -1,0 +1,9 @@
+<h1 id="person-name">{{person.full_name}}</h1>
+
+<ul id="person-action" class="nav nav-pills">
+  <li {% if active == "overview" %}class="active"{% endif %}>
+    <a href="/people/{{person.nickname}}">Overview</a>
+  </li>
+  <li {% if active == "journal" %}class="active"{% endif %}><a href="/people/{{person.nickname}}/journal">Journal</a></li>
+  <li><a href="/people/{{person.nickname}}/feedback">Feedback</a></li>
+</ul>

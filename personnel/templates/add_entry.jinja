@@ -1,12 +1,15 @@
 {% extends "base.jinja" %}
 
 {% block content %}
-<h1>Add an Entry for {{person.first_name}} </h1>
+<h2>Add an Entry for {{person.first_name}} </h2>
 
+{% include "modules/things_to_address.jinja" with person=person %}
+
+<h4> What you talked about: </h4>
 <form method=POST id="entry-form">{% csrf_token %}
     <textarea class="content" name="content"></textarea>
     
-    <h4>Add Feedback that {{person.first_name}} gave:</h4>
+    <h4>Feedback that {{person.first_name}} gave:</h4>
     <ul id="feedback-field-list">
         <li class="feedback-field">
             <textarea class="feedback-content" /></textarea>

@@ -1,16 +1,8 @@
 {% extends "base.jinja" %}
 
 {% block content %}
-<h1 id="person-name">{{person.full_name}}</h1>
-
 {%csrf_token %}
-    <ul id="person-action" class="nav nav-pills">
-      <li>
-        <a href="/people/{{person.nickname}}">Overview</a>
-      </li>
-      <li class="active"><a href="/people/{{person.nickname}}/journal">Journal</a></li>
-      <li><a href="/people/{{person.nickname}}/feedback">Feedback</a></li>
-    </ul>
+    {% include "modules/person_nav.jinja" with person=person active="journal" %}
 
     <div class="person-content" id="journal">
         <a href="/people/{{person.nickname}}/journal/add">Add new entry</a>

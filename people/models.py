@@ -10,7 +10,14 @@ class Person(models.Model):
     
     def full_name(self):
         return self.first_name + " " + self.last_name
-
+    
+    def pending_feedback(self):
+        return Feedback.objects.filter(
+            recipient=self, 
+            communicated=False,
+            closed_loop=False
+        )
+    
 class Entry(models.Model):
     content = models.TextField()
     created = models.DateTimeField()

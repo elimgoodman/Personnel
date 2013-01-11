@@ -1,0 +1,9 @@
+<h4> Things to Address: </h4>
+<ul id="things-to-address">
+    {% for feedback in person.pending_feedback %}
+        <li><a href="/people/{{feedback.originator.nickname}}">{{feedback.originator.full_name}}</a>:
+        &quot;
+        {{feedback.content}}
+        &quot;</li>
+    {% endfor %}
+</ul>
