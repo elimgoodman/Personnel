@@ -22,6 +22,14 @@
                 <div class="date">{{entry.created|date:"M d, Y"}}</div>
                 <div class="content">{{entry.content}}</div>
             </li>
+
+            <div class="feedback-divider"></div>
+
+            <ul class="feedback">
+              {% for f in entry.feedback %}
+                  <li>&quot;{{f.content}}&quot; for <a href="/people/{{f.recipient.nickname}}">{{f.recipient.full_name}}</a></li>
+              {% endfor %}
+            </ul>
         {% endfor %}
     </ul>
 </ul>

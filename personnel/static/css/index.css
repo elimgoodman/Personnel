@@ -39,17 +39,20 @@ textarea:focus {
 }
 
 textarea {
-    min-height: 300px;
     box-shadow: none;
     padding: 12px;
     width: 100%;
+}
+
+textarea.content {
+    min-height: 300px;
 }
 
 .person-content {
     margin-top: 18px;
 }
 
-#entries {
+#entries, #feedback-field-list {
     list-style: none;
     margin: 0;
 }
@@ -61,4 +64,20 @@ textarea {
 .journal-entry .date {
     font-weight: bold;
     margin-bottom: 9px;
+}
+
+.feedback-field select {
+  margin-top: 12px;
+}
+
+ul.feedback {
+    margin: 0;
+    list-style: none;
+}
+
+.feedback-divider {
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #ccc;
+    margin: 18px 0;
+    width: 100%;
 }

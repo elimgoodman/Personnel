@@ -5,6 +5,7 @@ class Person(models.Model):
     last_name = models.CharField(max_length=200)
     nickname = models.CharField(max_length=200)
     info = models.TextField()
+    next_notes = models.TextField()
     active = models.BooleanField(default=True)
     
     def full_name(self):
@@ -15,3 +16,18 @@ class Entry(models.Model):
     created = models.DateTimeField()
     updated = models.DateTimeField()
     subject = models.ForeignKey(Person)
+    
+    def feedback(self):
+        return Feedback.objects.filter(entered_with=self)
+
+class Feedback(models.Model):
+    content = models.TextField()
+    originator = models.ForeignKey(Person, related_name="feedback_given")
+    recipient = models.ForeignKey(Person, related_name="feedback_recieved")
+    communicated = models.BooleanField(default=False)
+    communicated_on = models.DateTimeField(null=True)
+    closed_loop = models.BooleanField(default=False)
+    closed_loop_on = models.DateTimeField(null=True)
+    entered_with = models.ForeignKey(Entry)
+    created = models.DateTimeField()
+    updated = models.DateTimeField()

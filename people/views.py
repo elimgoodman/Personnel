@@ -1,6 +1,6 @@
 import json, datetime
 # Create your views here.
-from people.models import Person, Entry
+from people.models import Person, Entry, Feedback
 from django.shortcuts import render_to_response, redirect
 from django.template import Context, loader
 from django.http import HttpResponse
@@ -57,6 +57,19 @@ def add_entry(r, nickname):
             subject=person
         )
         e.save()
+        
+        fs = json.loads(r.POST['feedback'])
+        for f in fs:
+            fdbk = Feedback(
+                content = f['content'],
+                originator = person,
+                recipient_id = f['recipient'],
+                entered_with = e,
+                created=datetime.datetime.now(),
+                updated=datetime.datetime.now()
+            )
+            fdbk.save()
+
         return redirect("/people/%s/journal" % (person.nickname))
 
 def edit_person(r):

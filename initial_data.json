@@ -1,0 +1,26 @@
+[
+  {
+    "model": "people.Person",
+    "pk": 1,
+    "fields": {
+      "first_name": "Eli",
+      "last_name": "Goodman",
+      "nickname": "eli",
+      "info": "Hello world",
+      "next_notes": "Talk about the thing",
+      "active": true
+    }
+  },
+    {
+    "model": "people.Person",
+    "pk": 2,
+    "fields": {
+      "first_name": "Bob",
+      "last_name": "Loblaw",
+      "nickname": "bob",
+      "info": "Hello world",
+      "next_notes": "Talk about the thing",
+      "active": true
+    }
+  }
+]
