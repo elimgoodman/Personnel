@@ -22,6 +22,12 @@
                   <li>&quot;{{f.content}}&quot; for <a href="/people/{{f.recipient.nickname}}">{{f.recipient.full_name}}</a></li>
               {% endfor %}
             </ul>
+
+            <ul class="check-ins">
+              {% for c in entry.check_ins %}
+                  <li>Check in about: {{c.content}} on {{c.check_in_on|date:"M d, Y"}}</li>
+              {% endfor %}
+            </ul>
         {% endfor %}
     </ul>
 </ul>

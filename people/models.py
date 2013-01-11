@@ -40,6 +40,9 @@ class Entry(models.Model):
     def feedback(self):
         return Feedback.objects.filter(entered_with=self)
 
+    def check_ins(self):
+        return Checkin.objects.filter(entered_with=self)
+
 class Feedback(models.Model):
     content = models.TextField()
     originator = models.ForeignKey(Person, related_name="feedback_given")
@@ -51,3 +54,11 @@ class Feedback(models.Model):
     entered_with = models.ForeignKey(Entry)
     created = models.DateTimeField()
     updated = models.DateTimeField()
+
+class Checkin(models.Model):
+    content = models.TextField()
+    recipient = models.ForeignKey(Person)
+    check_in_on = models.DateField()
+    created = models.DateTimeField()
+    updated = models.DateTimeField()
+    entered_with = models.ForeignKey(Entry)

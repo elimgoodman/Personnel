@@ -1,6 +1,6 @@
 import json, datetime
 # Create your views here.
-from people.models import Person, Entry, Feedback
+from people.models import Person, Entry, Feedback, Checkin
 from django.shortcuts import render_to_response, redirect
 from django.template import Context, loader
 from django.http import HttpResponse
@@ -74,7 +74,8 @@ def add_entry(r, nickname):
 
     if(r.method == "GET"):
         return render(r, 'add_entry.jinja', {
-            'person': person
+            'person': person,
+            'weeks': range(1, 10)
         })
     elif(r.method == "POST"):
         e = Entry(
@@ -84,8 +85,8 @@ def add_entry(r, nickname):
             subject=person
         )
         e.save()
-        
-        fs = json.loads(r.POST['feedback'])
+
+        fs = get_json(r, 'feedback');
         for f in fs:
             fdbk = Feedback(
                 content = f['content'],
@@ -97,7 +98,26 @@ def add_entry(r, nickname):
             )
             fdbk.save()
 
+        cs = get_json(r, 'check_ins')
+        for c in cs:
+            ci = Checkin(
+                content = c['content'],
+                recipient = person,
+                entered_with = e,
+                #FIXME: MAKE THIS RIGHT
+                check_in_on = datetime.datetime.now(),
+                created=datetime.datetime.now(),
+                updated=datetime.datetime.now()
+            )
+            ci.save()
+
         return redirect("/people/%s/journal" % (person.nickname))
+
+def get_json(r, param):
+    if(r.POST[param]):
+        return json.loads(r.POST[param])
+    else:
+        return []
 
 def edit_person(r):
     if(r.method == "GET"):

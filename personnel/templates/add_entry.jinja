@@ -13,7 +13,13 @@
     <ul id="feedback-field-list"></ul>
     
     <a href="#" id="add-feedback">Add feedback</a>
+
+    <h4>Things to check in on:</h4>
+    <ul id="check-in-list"></ul>
+
+    <a href="#" id="add-check-in">Add check-in</a>
     <input type="hidden" value="" id="feedback-field" name="feedback" />
+    <input type="hidden" value="" id="check-in-field" name="check_ins" />
     <input class="btn" type="submit" value="Save" />
 </form>
 
@@ -29,12 +35,30 @@
     </select>
 </li>
 
+<li class="check-in template">
+    <textarea class="check-in-content" /></textarea>
+    in
+    <select class="check-in-weeks">
+        {% for week in weeks %}
+            <option value="{{week}}">{{week}}</option>
+        {% endfor %}
+    </select>
+    weeks
+</li>
+
 <script type="text/javascript">
     $(function(){
         $("#add-feedback").click(function() {
             var li = $(".feedback-field.template").clone();
             li.removeClass('template');
             $("#feedback-field-list").append(li);
+            return false;
+        });
+
+        $("#add-check-in").click(function() {
+            var li = $(".check-in.template").clone();
+            li.removeClass('template');
+            $("#check-in-list").append(li);
             return false;
         });
 
@@ -51,8 +75,20 @@
                   });
               }
           });
-        
-          $("#feedback-field").val(JSON.stringify(fields));
+
+          var check_ins = [];
+          $('.check-in').not('.template').each(function(){
+              var content = $(this).find(".check-in-content").val();
+              var weeks = $(this).find(".check-in-weeks").val();
+                
+              if(content != "") {
+                  check_ins.push({
+                      content: content,
+                      weeks: weeks
+                  });
+              }
+          });
+          $("#check-in-field").val(JSON.stringify(check_ins));
         });
     });
 </script>
