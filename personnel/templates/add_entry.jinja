@@ -7,7 +7,7 @@
 
 <h4> What you talked about: </h4>
 <form method=POST id="entry-form">{% csrf_token %}
-    <textarea class="content" name="content"></textarea>
+    {% include "modules/rtf_textarea.jinja" with name="content" %}
     
     <h4>Feedback that {{person.first_name}} gave:</h4>
     <ul id="feedback-field-list"></ul>
@@ -48,6 +48,12 @@
 
 <script type="text/javascript">
     $(function(){
+        var editor = new wysihtml5.Editor("wysihtml5-textarea", {
+            toolbar:      "wysihtml5-toolbar",
+            stylesheets:  "/static/css/wysihtml5.css",
+            parserRules:  wysihtml5ParserRules
+        });
+
         $("#add-feedback").click(function() {
             var li = $(".feedback-field.template").clone();
             li.removeClass('template');
@@ -88,6 +94,7 @@
                   });
               }
           });
+          $("#feedback-field").val(JSON.stringify(fields));
           $("#check-in-field").val(JSON.stringify(check_ins));
         });
     });

@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 
 class Person(models.Model):
@@ -25,11 +26,20 @@ class Person(models.Model):
             closed_loop=False
         )
 
+    def unaddressed_checkins(self):
+        return Checkin.objects.filter(
+            recipient=self, 
+            checked_in=False,
+            check_in_on__lte=datetime.date.today()
+        )
+
     def get_url(self):
         return "/people/%s" % (self.nickname)
     
     def has_things_to_address(self):
-        return bool(self.pending_feedback()) or bool(self.communicated_feedback())
+        return bool(self.pending_feedback()) \
+            or bool(self.communicated_feedback()) \
+            or bool(self.unaddressed_checkins())
     
 class Entry(models.Model):
     content = models.TextField()
@@ -61,4 +71,6 @@ class Checkin(models.Model):
     check_in_on = models.DateField()
     created = models.DateTimeField()
     updated = models.DateTimeField()
+    checked_in = models.BooleanField(default=False)
+    checked_in_on = models.DateTimeField(null=True)
     entered_with = models.ForeignKey(Entry)

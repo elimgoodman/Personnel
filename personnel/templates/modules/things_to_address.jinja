@@ -20,5 +20,14 @@
                 <a class="closed-loop btn" data-feedback-id="{{feedback.id}}" href='#'>Closed Loop</a>
             </li>
         {% endfor %}
+        {% for checkin in person.unaddressed_checkins %}
+            <li>
+                Check in on: 
+                &quot;
+                {{checkin.content}}
+                &quot;
+                <a class="checked-in btn" data-checkin-id="{{checkin.id}}" href='#'>Checked In</a>
+            </li>
+        {% endfor %}
     </ul>
 {% endif %}

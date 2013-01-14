@@ -4,45 +4,36 @@
 
     {% include "modules/person_nav.jinja" with person=person active="overview" %}
 
-    {%csrf_token %}
-    <div class="person-content" id="person-info" data-name="{{person.nickname}}">
-        {% if person.info %}
-            {{person.info}}
-        {% else %}
-            <em>Nothing yet...</em>
-        {% endif %}
+    {% csrf_token %}
+    <div class="person-content" id="person-info">
+        {% include "modules/rtf_textarea.jinja" with value=person.info %}
+        <a href='#' class="btn" id="save-btn" data-name="{{person.nickname}}">Save</a>
     </div>
 
     {% include "modules/things_to_address.jinja" with person=person %}
 </ul>
 
 <script type="text/javascript">
-  function trim (str) {
-      return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-  }
-
   $(function(){
-      var info = $("#person-info");
-      var name = info.data('name');
-      var info_txt = trim(info.html());
+      var editor = new wysihtml5.Editor("wysihtml5-textarea", {
+        toolbar:      "wysihtml5-toolbar",
+        stylesheets:  "/static/css/wysihtml5.css",
+        parserRules:  wysihtml5ParserRules
+    });
 
-      info.editable(function(value, settings) {
-          var value = trim(value);
-          var csrf = $("[name=csrfmiddlewaretoken]").val();
-          
-          var params = {
-              csrfmiddlewaretoken: csrf,
-              info: value
-          };
+    $("#save-btn").click(function(e){
 
-          $.post("/people/" + name + "/update_info", params);
-          return value;
-      }, {
-          type: 'textarea',
-          onblur: 'ignore',
-          submit: 'Done',
-          data: info_txt
-      });
+        var csrf = $("[name=csrfmiddlewaretoken]").val();
+        var val = $("#wysihtml5-textarea").val();
+
+        var params = {
+            csrfmiddlewaretoken: csrf,
+            info: val
+        };
+
+        var name = $(this).attr('data-name');
+        $.post("/people/" + name + "/update_info", params);
+    });
   });
 </script>
 

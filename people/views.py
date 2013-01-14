@@ -15,7 +15,7 @@ def render(r, template, context = {}):
     return render_to_response(template, context)
 
 def people(r):
-    return render(r, 'people.jinja')
+    return render(r, 'manage_people.jinja')
 
 def manage_people(r):
     return render(r, 'manage_people.jinja')
@@ -104,8 +104,7 @@ def add_entry(r, nickname):
                 content = c['content'],
                 recipient = person,
                 entered_with = e,
-                #FIXME: MAKE THIS RIGHT
-                check_in_on = datetime.datetime.now(),
+                check_in_on = datetime.datetime.now() + datetime.timedelta(weeks=int(c['weeks'])),
                 created=datetime.datetime.now(),
                 updated=datetime.datetime.now()
             )
@@ -132,4 +131,13 @@ def edit_person(r):
         )
         p.save()
         return redirect(people)
+
+def checked_in(r):
+    checkin_id = r.POST['checkin_id']
+    c = Checkin.objects.get(id=checkin_id)
+    c.checked_in = True
+    c.checked_in_on = datetime.datetime.now()
+    c.save()
+
+    return HttpResponse(json.dumps(True), mimetype="application/json" )
 

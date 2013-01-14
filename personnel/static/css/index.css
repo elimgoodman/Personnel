@@ -3,7 +3,7 @@ body {
 }
 
 #content {
-    margin-top: 28px;
+    margin-top: 48px;
 }
 
 #people-selector {
@@ -42,6 +42,7 @@ textarea {
     box-shadow: none;
     padding: 12px;
     width: 100%;
+    margin-top: 18px;
 }
 
 textarea.content {
@@ -52,7 +53,7 @@ textarea.content {
     margin-top: 18px;
 }
 
-#entries, #feedback-field-list {
+#entries, #feedback-field-list, ul.check-ins, ul.feedback {
     list-style: none;
     margin: 0;
 }
@@ -63,7 +64,8 @@ textarea.content {
 
 .journal-entry .date {
     font-weight: bold;
-    margin-bottom: 9px;
+    float: right;
+    font-style: italic;
 }
 
 .feedback-field select {
@@ -101,4 +103,39 @@ h1 a:hover {
 
 .feedback-field.template, .check-in.template {
     display: none;
+}
+
+#wysihtml5-textarea {
+    min-height: 300px;
+}
+
+#person-nav {
+    margin-bottom: 28px;
+}
+
+.checkin-date {
+    font-weight: bold;
+    font-style: italic;
+    color: #313131;
+}
+
+.icon {
+    margin-right: 6px;
+}
+
+.journal-entry {
+    background: none repeat scroll 0 0 white;
+    border: 1px solid #DDDDDD;
+    border-radius: 3px 3px 3px 3px;
+    margin: 12px 0;
+    padding: 12px;
+}
+
+ul.entry-additional {
+    margin-top: 12px;
+}
+
+.dropdown-toggle {
+    color: #333;
+    text-shadow: 0px 1px 0px #eee;
 }

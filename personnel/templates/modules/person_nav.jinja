@@ -1,9 +1,11 @@
-<h1 id="person-name"><a href="{{person.get_url}}">{{person.full_name}}</a></h1>
+<div id="person-nav">
+    <h1 id="person-name"><a href="{{person.get_url}}">{{person.full_name}}</a></h1>
 
-<ul id="person-action" class="nav nav-pills">
-  <li {% if active == "overview" %}class="active"{% endif %}>
-    <a href="/people/{{person.nickname}}">Overview</a>
-  </li>
-  <li {% if active == "journal" %}class="active"{% endif %}><a href="/people/{{person.nickname}}/journal">Journal</a></li>
-  <li {% if active == "feedback" %}class="active"{% endif %}><a href="/people/{{person.nickname}}/feedback">Feedback</a></li>
-</ul>
+    <ul id="person-action" class="nav nav-pills">
+      <li {% if active == "overview" %}class="active"{% endif %}>
+        <a href="/people/{{person.nickname}}">Overview</a>
+      </li>
+      <li {% if active == "journal" %}class="active"{% endif %}><a href="/people/{{person.nickname}}/journal">Journal</a></li>
+      <li {% if active == "feedback" %}class="active"{% endif %}><a href="/people/{{person.nickname}}/feedback">Feedback</a></li>
+    </ul>
+</div>
