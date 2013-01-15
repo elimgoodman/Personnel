@@ -6,6 +6,8 @@
 
     {% csrf_token %}
     <div class="person-content" id="person-info">
+
+        <h4>Notes:</h4>
         {% include "modules/rtf_textarea.jinja" with value=person.info %}
         <a href='#' class="btn" id="save-btn" data-name="{{person.nickname}}">Save</a>
         <div id="saved-msg">Saved!</div>
