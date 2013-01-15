@@ -1,33 +1,37 @@
 {% if person.has_things_to_address %}
-    <h4> Things to Address: </h4>
-    <ul id="things-to-address">
-        {% for feedback in person.pending_feedback %}
-            <li>
-                <a href="/people/{{feedback.originator.nickname}}">{{feedback.originator.full_name}}</a> gave feedback:
-                &quot;
-                {{feedback.content}}
-                &quot;
-                <a class="communicated btn" data-feedback-id="{{feedback.id}}" href='#'>Communicated</a>
-            </li>
-        {% endfor %}
-        {% for feedback in person.communicated_feedback %}
-            <li>
-                Communicated
-                &quot;
-                {{feedback.content}}
-                &quot;
-                to <a href="{{feedback.recipient.get_url}}">{{feedback.recipient.full_name}}</a>
-                <a class="closed-loop btn" data-feedback-id="{{feedback.id}}" href='#'>Closed Loop</a>
-            </li>
-        {% endfor %}
-        {% for checkin in person.unaddressed_checkins %}
-            <li>
-                Check in on: 
-                &quot;
-                {{checkin.content}}
-                &quot;
-                <a class="checked-in btn" data-checkin-id="{{checkin.id}}" href='#'>Checked In</a>
-            </li>
-        {% endfor %}
-    </ul>
+    <div id="things-to-address">
+        <h4> Things to Address: </h4>
+        <ul id="things-to-address">
+            {% for feedback in person.pending_feedback %}
+                <li>
+                    <span class="thing-to-address">
+                        <a href="/people/{{feedback.originator.nickname}}">{{feedback.originator.full_name}}</a> gave feedback:
+                        &quot;
+                        {{feedback.content}}
+                        &quot;
+                    </span>
+                    <a class="communicated btn" data-feedback-id="{{feedback.id}}" href='#'>Communicated</a>
+                </li>
+            {% endfor %}
+            {% for feedback in person.communicated_feedback %}
+                <li>
+                    <span class="thing-to-address">
+                        Communicated
+                        &quot;{{feedback.content}}&quot;
+                        to <a href="{{feedback.recipient.get_url}}">{{feedback.recipient.full_name}}</a>
+                    </span>
+                    <a class="closed-loop btn" data-feedback-id="{{feedback.id}}" href='#'>Closed Loop</a>
+                </li>
+            {% endfor %}
+            {% for checkin in person.unaddressed_checkins %}
+                <li>
+                    <span class="thing-to-address">
+                        Check in on: 
+                        &quot;{{checkin.content}}&quot;
+                    </span>
+                    <a class="checked-in btn" data-checkin-id="{{checkin.id}}" href='#'>Checked In</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endif %}

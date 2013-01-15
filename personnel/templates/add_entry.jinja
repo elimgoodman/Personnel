@@ -9,18 +9,24 @@
 <form method=POST id="entry-form">{% csrf_token %}
     {% include "modules/rtf_textarea.jinja" with name="content" %}
     
-    <h4>Feedback that {{person.first_name}} gave:</h4>
-    <ul id="feedback-field-list"></ul>
+    <div>
+        <h4>Feedback that {{person.first_name}} gave:</h4>
+        <ul id="feedback-field-list"></ul>
+    </div>
     
     <a href="#" id="add-feedback">Add feedback</a>
 
-    <h4>Things to check in on:</h4>
-    <ul id="check-in-list"></ul>
+    <div>
+        <h4>Things to check in on:</h4>
+        <ul id="check-in-list"></ul>
+    </div>
 
-    <a href="#" id="add-check-in">Add check-in</a>
+    <div>
+        <a href="#" id="add-check-in">Add check-in</a>
+    </div>
     <input type="hidden" value="" id="feedback-field" name="feedback" />
     <input type="hidden" value="" id="check-in-field" name="check_ins" />
-    <input class="btn" type="submit" value="Save" />
+    <input class="btn" type="submit" value="Save" id="entry-save-btn" />
 </form>
 
 <li class="feedback-field template">

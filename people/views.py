@@ -118,7 +118,21 @@ def get_json(r, param):
     else:
         return []
 
-def edit_person(r):
+def edit_person(r, nickname):
+    p = Person.objects.get(nickname=nickname)
+
+    if(r.method == "GET"):
+        return render(r, 'edit_person.jinja', {
+            'person': p
+        })
+    elif(r.method == "POST"):
+        p.first_name=r.POST['fname']
+        p.last_name=r.POST['lname']
+        p.nickname=r.POST['nickname']
+
+        p.save()
+        return redirect(people)
+def add_person(r):
     if(r.method == "GET"):
         return render(r, 'edit_person.jinja')
     elif(r.method == "POST"):

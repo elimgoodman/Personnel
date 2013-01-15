@@ -8,6 +8,7 @@
     <div class="person-content" id="person-info">
         {% include "modules/rtf_textarea.jinja" with value=person.info %}
         <a href='#' class="btn" id="save-btn" data-name="{{person.nickname}}">Save</a>
+        <div id="saved-msg">Saved!</div>
     </div>
 
     {% include "modules/things_to_address.jinja" with person=person %}
@@ -32,7 +33,9 @@
         };
 
         var name = $(this).attr('data-name');
-        $.post("/people/" + name + "/update_info", params);
+        $.post("/people/" + name + "/update_info", params, function() {
+            $("#saved-msg").show().delay(400).fadeOut(1000);    
+        });
     });
   });
 </script>

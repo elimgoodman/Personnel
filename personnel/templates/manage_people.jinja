@@ -12,14 +12,13 @@
             <td>
                 <a href="{{person.get_url}}/edit">Edit</a>
             </td>
-            <td>
-                <a href="{{person.get_url}}/decativate">Deactivate</a>
-            </td>
         </tr>
     {% endfor %}
     </table>
+
+    <a class="btn" href="/people/add">Add A Person</a>
 {% else %}
-    You're not managing anyone. <a href="/people/edit">Add someone.</a>
+    You're not managing anyone. <a href="/people/add">Add someone.</a>
 {% endif %}
 {% endblock %}
 

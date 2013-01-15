@@ -17,11 +17,7 @@
                 {% if entry.feedback %}
                     <ul class="feedback entry-additional">
                       {% for f in entry.feedback %}
-                          <li>
-                            <img class='icon' src="/static/img/at.png" />
-                            <a href="/people/{{f.recipient.nickname}}">{{f.recipient.nickname}}</a>:
-                            &quot;{{f.content}}&quot; 
-                          </li>
+                        {% include "modules/feedback.jinja" with feedback=f %}
                       {% endfor %}
                     </ul>
                 {% endif %}
@@ -29,11 +25,7 @@
                 {% if entry.check_ins %}
                     <ul class="check-ins entry-additional">
                       {% for c in entry.check_ins %}
-                          <li>
-                            <img class='icon' src="/static/img/clock.png" />
-                            <span class="checkin-content">{{c.content}}</span> on 
-                            <span class="checkin-date">{{c.check_in_on|date:"M d, Y"}}</span> 
-                          </li>
+                        {% include "modules/checkin.jinja" with checkin=c %}
                       {% endfor %}
                     </ul>
                 {% endif %}

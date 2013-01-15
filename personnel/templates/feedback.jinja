@@ -7,13 +7,8 @@
     <ul id="feedback">
         {% for entry in feedback %}
             <li>
-                <div>Submitted by <a href="{{entry.originator.get_url}}">{{entry.originator.full_name}}</a></div>
-                <div>Created on {{entry.created|date:"M d, Y"}}</div>
-                {% if entry.communicated %}<div>Communicated on {{entry.communicated_on|date:"M d, Y"}}</div>{% endif %}
-                {% if entry.closed_loop %}<div>Closed loop on {{entry.closed_loop_on|date:"M d, Y"}}</div>{% endif %}
-                <div>
-                    &quot;{{entry.content}}&quot;
-                </div>
+                <div class="date">{{entry.created|date:"M d, Y"}}</div>
+                <span><a href="{{entry.originator.get_url}}">{{entry.originator.nickname}}</a>:&nbsp;</span>&quot;{{entry.content}}&quot;
             </li>
         {% endfor %}
     </ul>
