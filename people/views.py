@@ -8,7 +8,7 @@ from django.core.context_processors import csrf
 
 def render(r, template, context = {}):
     always = {
-        'people': Person.objects.all()
+        'people': Person.objects.all().order_by('first_name')
     }
     context.update(csrf(r))
     context.update(always)
