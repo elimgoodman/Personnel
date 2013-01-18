@@ -7,7 +7,7 @@ A tool for managing one-on-ones.
 ```bash
 $ git clone git@github.com:elimgoodman/Personnel.git
 $ cd Personnel/
-$ sudo python easy_install django
+$ sudo easy_install django
 $ python manage.py syncdb
 $ python manage.py runserver
 ```
