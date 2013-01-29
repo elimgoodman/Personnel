@@ -55,7 +55,7 @@ textarea.content {
 
 #entries, #feedback-field-list, #check-in-list,
 ul.check-ins, ul.feedback,
-#feedback,
+#feedback, #coaching-tips,
 #things-to-address ul {
     list-style: none;
     margin: 0;
@@ -158,4 +158,20 @@ ul.entry-additional {
     font-size: 24px;
     font-weight: bold;
     display: none;
+}
+
+#coaching-tips {
+    margin-bottom: 24px;
+}
+
+#coaching-tips > li {
+    font-family: monospace;
+    background: #830001;
+    display: inline;
+    padding: 3px 9px;
+    color: white;
+    margin-right: 6px;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px #999;
+    text-shadow: 0 1px 0 #333;
 }

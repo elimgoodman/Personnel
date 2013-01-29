@@ -71,11 +71,17 @@ def view_person(r, nickname):
 
 def add_entry(r, nickname):
     person = Person.objects.get(nickname=nickname)
+    entries = Entry.objects.filter(subject=person).order_by('-created')
+    if entries:
+        last_time = entries[0]
+    else:
+        last_time = None
 
     if(r.method == "GET"):
         return render(r, 'add_entry.jinja', {
             'person': person,
-            'weeks': range(1, 10)
+            'weeks': range(1, 10),
+            'last_time': last_time
         })
     elif(r.method == "POST"):
         e = Entry(

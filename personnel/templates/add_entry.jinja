@@ -3,9 +3,22 @@
 {% block content %}
 <h2>Add an Entry for {{person.first_name}} </h2>
 
+{% if last_time %}
+    <h4>What you talked about last time: </h4>
+
+    {% include "modules/journal_entry.jinja" with entry=last_time %}
+{% endif %}
+
 {% include "modules/things_to_address.jinja" with person=person %}
 
-<h4> What you talked about: </h4>
+<h4> What you talked about this time: </h4>
+<ul id="coaching-tips">
+    <li>3-second pauses</li>
+    <li>More questions than statements</li>
+    <li>Open questions</li>
+    <li>Move down the pyramid</li>
+</ul>
+
 <form method=POST id="entry-form">{% csrf_token %}
     {% include "modules/rtf_textarea.jinja" with name="content" %}
     

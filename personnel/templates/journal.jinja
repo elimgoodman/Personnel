@@ -10,26 +10,7 @@
 
     <ul id="entries">
         {% for entry in entries %}
-            <li class="journal-entry">
-                <div class="date">{{entry.created|date:"M d, Y"}}</div>
-                <div class="entry-content">{{entry.content|safe}}</div>
-
-                {% if entry.feedback %}
-                    <ul class="feedback entry-additional">
-                      {% for f in entry.feedback %}
-                        {% include "modules/feedback.jinja" with feedback=f %}
-                      {% endfor %}
-                    </ul>
-                {% endif %}
-
-                {% if entry.check_ins %}
-                    <ul class="check-ins entry-additional">
-                      {% for c in entry.check_ins %}
-                        {% include "modules/checkin.jinja" with checkin=c %}
-                      {% endfor %}
-                    </ul>
-                {% endif %}
-            </li>
+            {% include "modules/journal_entry.jinja" with entry=entry %}
         {% endfor %}
     </ul>
 </ul>
